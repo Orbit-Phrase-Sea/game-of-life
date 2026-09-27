@@ -54,7 +54,6 @@ CELL_COLORS = {
 }
 
 
-#W, H = (1350,)*2
 W, H = (850,)*2
 #MATRIX_SHAPE = (199, 150)
 MATRIX_SHAPE = 100
@@ -109,10 +108,14 @@ def main():
                 state = get_next_state(state, False)
     
         if getting_state:
-            mpos = pygame.mouse.get_pos()
-            idx = int(mpos[1]//(H/state.shape[0])), int(mpos[0]//(W/state.shape[1]))
-            state[idx[0], idx[1]] = 0 if erase_cells else 1
-            state = get_next_state(state, False)
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+
+            row = int(mouse_y * state.shape[1] / H)
+            col = int(mouse_x * state.shape[0] / W)
+
+            if 0 <= row < state.shape[0] and 0 <= col < state.shape[1]:
+                state[row, col] = 0 if erase_cells else 1
+                state = get_next_state(state, False)
     
     
         # Draw current generation.
