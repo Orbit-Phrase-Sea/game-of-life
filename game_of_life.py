@@ -33,7 +33,7 @@ def get_next_state(state, update=True):
     return new_state
 
 
-color = {
+CELL_COLORS = {
     #1 : (19, 170, 25), # dark green
     1 : (255, 0, 0), # red
     2 : (216, 35, 141), # pink
@@ -113,8 +113,8 @@ def main():
                 if not cell:
                     continue
     
-                pygame.draw.circle(screen, color[cell], [(j+.5)*W/state.shape[1], (i+.5)*H/state.shape[0]], max(1, W/state.shape[0]/2), 0)
-                #pygame.draw.rect(screen, color[cell], [j*W/state.shape[1], i*H/state.shape[0], max(1, W/state.shape[0]), max(1, W/state.shape[0])], 0)
+                pygame.draw.circle(screen, CELL_COLORS[cell], [(j+.5)*W/state.shape[1], (i+.5)*H/state.shape[0]], max(1, W/state.shape[0]/2), 0)
+                #pygame.draw.rect(screen, CELL_COLORS[cell], [j*W/state.shape[1], i*H/state.shape[0], max(1, W/state.shape[0]), max(1, W/state.shape[0])], 0)
     
         pygame.display.flip()
     
