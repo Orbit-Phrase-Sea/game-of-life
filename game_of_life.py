@@ -24,7 +24,8 @@ def get_next_state(state, update=True):
 
                     if (0 <= neighbor_row < state.shape[0]
                         and 0 <= neighbor_col < state.shape[1]
-                        and state[neighbor_row, neighbor_col]):
+                        and state[neighbor_row, neighbor_col]
+                    ):
                         neighbor_count += 1
 
             if not update:
@@ -77,11 +78,11 @@ def main():
     
     # Start.
     getting_state = False
-    stop_time = True
+    paused = True
     erase_cells = False
     running = True
     while running:
-        clock.tick(60 if getting_state and stop_time else FPS)
+        clock.tick(60 if getting_state and paused else FPS)
         screen.fill(0)
     
         # Event handler.
@@ -92,7 +93,7 @@ def main():
                 running = False
     
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                stop_time = not stop_time
+                paused = not paused
     
     
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -129,7 +130,7 @@ def main():
     
         pygame.display.flip()
     
-        if stop_time:
+        if paused:
             continue
         state = get_next_state(state)
         state = get_next_state(state, False)
