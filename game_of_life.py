@@ -17,10 +17,9 @@ def get_next_state(state, update=True):
             neighbor_count = 0
 
             for idx_1, idx_2 in [(i+1, j+1), (i-1, j+1), (i+1, j-1), (i, j+1), (i+1, j), (i-1, j-1), (i-1, j), (i, j-1)]:
-                if idx_1 < 0 or idx_2 < 0:
-                    continue
                 if 0 <= idx_1 < state.shape[0] and 0 <= idx_2 < state.shape[1]:
-                    if state[idx_1, idx_2]: neighbor_count += 1
+                    if state[idx_1, idx_2]:
+                        neighbor_count += 1
 
             if not update:
                 if cell:
