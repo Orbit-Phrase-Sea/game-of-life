@@ -94,8 +94,10 @@ def main():
     
                 if event.button == pygame.BUTTON_LEFT:
                     erase_cells = False
-                if event.button == pygame.BUTTON_RIGHT:
+                elif event.button == pygame.BUTTON_RIGHT:
                     erase_cells = True
+                else:
+                    continue
     
                 getting_state = not getting_state
                 state = get_next_state(state, False)
