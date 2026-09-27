@@ -14,9 +14,17 @@ def get_next_state(state, update=True):
         for j, cell in enumerate(row):
             neighbor_count = 0
 
-            for idx_1, idx_2 in [(i+1, j+1), (i-1, j+1), (i+1, j-1), (i, j+1), (i+1, j), (i-1, j-1), (i-1, j), (i, j-1)]:
-                if 0 <= idx_1 < state.shape[0] and 0 <= idx_2 < state.shape[1]:
-                    if state[idx_1, idx_2]:
+            for row_offset in (-1, 0, 1):
+                for col_offset in (-1, 0, 1):
+                    if row_offset == 0 and col_offset == 0:
+                        continue
+
+                    neighbor_row = row_offset + i
+                    neighbor_col = col_offset + j
+
+                    if (0 <= neighbor_row < state.shape[0]
+                        and 0 <= neighbor_col < state.shape[1]
+                        and state[neighbor_row, neighbor_col]):
                         neighbor_count += 1
 
             if not update:
