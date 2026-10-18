@@ -33,9 +33,9 @@ Welcome to this colorful implementation of Conway's Game of Life, written in Pyt
 
 1. Make sure you have Python 3 installed. You can download it from [python.org](https://www.python.org/downloads/).
 
-2. Install Pygame if you haven't already:
+2. Install Pygame (the Community Edition) if you haven't already:
 ```bash
-pip install pygame
+pip install pygame-ce
 ```
 3. Install Numpy if you haven't already:
 ```bash
