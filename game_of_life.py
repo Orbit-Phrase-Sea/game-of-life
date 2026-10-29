@@ -10,23 +10,22 @@ import states
 def get_next_state(state, update=True):
     new_state = np.zeros(state.shape, dtype=np.int8)
 
+    offsets = [(i, j) for i in (-1, 0, 1) for j in (-1, 0, 1)]
+    offsets.pop(4)
+
     for i, row in enumerate(state):
         for j, cell in enumerate(row):
             neighbor_count = 0
 
-            for row_offset in (-1, 0, 1):
-                for col_offset in (-1, 0, 1):
-                    if row_offset == 0 and col_offset == 0:
-                        continue
+            for row_offset, col_offset in offsets:
+                neighbor_row = row_offset + i
+                neighbor_col = col_offset + j
 
-                    neighbor_row = row_offset + i
-                    neighbor_col = col_offset + j
-
-                    if (0 <= neighbor_row < state.shape[0]
-                        and 0 <= neighbor_col < state.shape[1]
-                        and state[neighbor_row, neighbor_col]
-                    ):
-                        neighbor_count += 1
+                if (0 <= neighbor_row < state.shape[0]
+                    and 0 <= neighbor_col < state.shape[1]
+                    and state[neighbor_row, neighbor_col]
+                ):
+                    neighbor_count += 1
 
             if not update:
                 if cell:
