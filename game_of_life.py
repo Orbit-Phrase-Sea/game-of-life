@@ -110,8 +110,8 @@ def main():
         if getting_state:
             mouse_x, mouse_y = pygame.mouse.get_pos()
 
-            row = int(mouse_y * state.shape[1] / H)
-            col = int(mouse_x * state.shape[0] / W)
+            row = int(mouse_y * state.shape[0] / H)
+            col = int(mouse_x * state.shape[1] / W)
 
             if 0 <= row < state.shape[0] and 0 <= col < state.shape[1]:
                 state[row, col] = 0 if erase_cells else 1
