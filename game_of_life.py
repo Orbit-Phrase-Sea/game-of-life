@@ -60,21 +60,21 @@ MATRIX_SHAPE = 100
 FPS = 12
 
 def main():
-    
+
     pygame.init()
     gen = 0
     pygame.display.set_caption(f'game of life\tgen: {gen}')
-    
+
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((W, H))
-    
+
     # Initial state.
     state = states.diagonals(MATRIX_SHAPE)
     #state = states.random(MATRIX_SHAPE)
     #state = states.empty(MATRIX_SHAPE)
-    
+
     state = get_next_state(state, False)
-    
+
     # Start.
     getting_state = False
     paused = True
@@ -83,30 +83,30 @@ def main():
     while running:
         clock.tick(60 if getting_state and paused else FPS)
         screen.fill(0)
-    
+
         # Event handler.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 running = False
-    
+
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 paused = not paused
-    
-    
+
+
             if event.type == pygame.MOUSEBUTTONDOWN:
-    
+
                 if event.button == pygame.BUTTON_LEFT:
                     erase_cells = False
                 elif event.button == pygame.BUTTON_RIGHT:
                     erase_cells = True
                 else:
                     continue
-    
+
                 getting_state = not getting_state
                 state = get_next_state(state, False)
-    
+
         if getting_state:
             mouse_x, mouse_y = pygame.mouse.get_pos()
 
@@ -116,27 +116,26 @@ def main():
             if 0 <= row < state.shape[0] and 0 <= col < state.shape[1]:
                 state[row, col] = 0 if erase_cells else 1
                 state = get_next_state(state, False)
-    
-    
+
+
         # Draw current generation.
         for i, row in enumerate(state):
             for j, cell in enumerate(row):
                 if not cell:
                     continue
-    
+
                 pygame.draw.circle(screen, CELL_COLORS[cell], [(j+.5)*W/state.shape[1], (i+.5)*H/state.shape[0]], max(1, W/state.shape[0]/2), 0)
                 #pygame.draw.rect(screen, CELL_COLORS[cell], [j*W/state.shape[1], i*H/state.shape[0], max(1, W/state.shape[0]), max(1, W/state.shape[0])], 0)
-    
+
         pygame.display.flip()
-    
+
         if paused:
             continue
         state = get_next_state(state)
         state = get_next_state(state, False)
         gen += 1
         pygame.display.set_caption(f'game of life\tgen: {gen}')
-    
-    
+
     pygame.quit()
 
 
