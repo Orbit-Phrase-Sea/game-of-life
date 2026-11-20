@@ -55,7 +55,7 @@ python game_of_life.py
 
 - **Spacebar:** Pause or resume the simulation.
 - **Left-click:** Enter cell adding mode. New cells are added at the mouse pointer position.
-- **Right-click:** Enter cell deleting mode. New cells are added at the mouse pointer position.
+- **Right-click:** Enter cell deleting mode. Cells at the mouse pointer position are deleted.
 - Press left-click or right-click to exit any editing mode.
 
 ## How It Works
